@@ -1,0 +1,21 @@
+.Navigation {
+  width: 100%;
+  height: 4em;
+  border-bottom: 1px solid var(--color-tan);
+  background-color: var(--color-white);
+  display: grid;
+  grid-template-columns: 75% 10% 10% 5%;
+  justify-items: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1em;
+}
+
+.Navigation-pseudostore {
+  justify-self: start;
+}
+
+.Navigation-link {
+  text-decoration: none;
+  color: var(--color-black);
+}
