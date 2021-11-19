@@ -1,0 +1,25 @@
+.Home {
+  position: absolute;
+  top: 4em;
+  width: 100%;
+}
+
+.Home-bg {
+  height: 500px;
+  background-image: url("../home.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.Home-shop {
+  color: var(--color-black);
+}
+
+.Categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4em;
+}

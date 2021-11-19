@@ -1,0 +1,12 @@
+.Category {
+  text-decoration: none;
+}
+
+.Category-img {
+  max-height: 100px;
+}
+
+.Category-description {
+  text-transform: capitalize;
+  color: var(--color-black);
+}

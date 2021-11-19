@@ -9,10 +9,14 @@
   align-items: center;
   box-sizing: border-box;
   padding: 1em;
+  position: fixed;
+  z-index: 10;
 }
 
 .Navigation-pseudostore {
   justify-self: start;
+  font-weight: bold;
+  font-size: 2em;
 }
 
 .Navigation-link {
