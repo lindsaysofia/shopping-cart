@@ -5,6 +5,12 @@
   text-align: left;
 }
 
+@media only screen and (max-width: 500px) {
+  .About {
+    top: 10em;
+  }
+}
+
 .About > * {
   margin: 16px;
   padding: 0;
