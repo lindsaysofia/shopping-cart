@@ -2,4 +2,59 @@
   position: absolute;
   top: 4em;
   width: 100%;
+  display: grid;
+  grid-template-rows: fit-content auto;
+  grid-template-columns: 15% 85%;
+  grid-template-areas: 
+    "results results"
+    "filter products";
+  gap: 1em;
+  text-align: left;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 760px) {
+  .Shop {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* .Shop > * {
+  padding: 0 16px;
+} */
+
+.Shop-results {
+  grid-area: results;
+  justify-self: start;
+}
+
+.Shop-filter {
+  grid-area: filter;
+  align-self: start;
+}
+
+.Shop-products {
+  grid-area: products;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.Shop-product {
+  width: 200px;
+  height: 300px;
+  border: 1px solid var(--color-tan);
+  display: grid;
+  grid-template-rows: 50% 50%;
+  justify-items: center;
+  align-items: start;
+  text-align: center;
+}
+
+.Shop-product img {
+  max-height: 100px;
+  max-width: 100px;
+  align-self: center;
 }

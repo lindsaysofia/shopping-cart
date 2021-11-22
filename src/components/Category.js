@@ -14,7 +14,9 @@ function Category(props) {
 
   useEffect(() =>{
     getCategoryData();
-    console.log(data);
+    return () => {
+      setData([{}]);
+    };
   }, []);
 
   return (
