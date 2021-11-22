@@ -1,5 +1,22 @@
 .About {
   position: absolute;
   top: 4em;
-  width: 100%;
+  width: 50%;
+  text-align: left;
 }
+
+.About > * {
+  margin: 16px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  
+}
+
+li {
+  list-style: none;
+  padding: 1em 0;
+}
+
