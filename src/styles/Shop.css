@@ -68,6 +68,12 @@ legend {
   justify-items: center;
   align-items: start;
   text-align: center;
+  text-decoration: none;
+  color: var(--color-black);
+}
+
+.Shop-product:hover {
+  cursor: pointer;
 }
 
 .Shop-product img {

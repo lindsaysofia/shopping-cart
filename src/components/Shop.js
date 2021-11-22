@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Shop.css';
 
 function Shop() {
@@ -51,10 +52,10 @@ function Shop() {
       <div className="Shop-products">
         {products.map((product, index) => {
           return (
-            <div key={index} className="Shop-product">
+            <Link key={index} className="Shop-product" to={`/shop/${product.id}`} onClick={() => console.log(product.id)}>
               <img src={product.image} alt=""/>
               <p>{product.title}</p>
-            </div>
+            </Link>
           );
         })}
       </div>
