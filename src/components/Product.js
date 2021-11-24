@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
+import Stars from "./Stars";
 
 function Product() {
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState({rating: {rate: 0, count: 0}});
   const params = useParams();
   const id = params.id;
 
@@ -16,7 +17,7 @@ function Product() {
   useEffect(() => {
     getProduct();
     return () => {
-      setProduct({});
+      setProduct({rating: {rate: 0, count: 0}});
     };
   }, []);
 
@@ -29,6 +30,14 @@ function Product() {
       />
       <h2 className="Product-title">{product.title}</h2>
       <p className="Product-price">{product.price}</p>
+      <div 
+        className="rating"
+      >
+        <Stars rate={product.rating.rate}/>
+        <p className="rating-rate">{product.rating.rate}</p>
+        <p className="rating-count">See {product.rating.count} reviews</p>
+      </div> 
+      <p className="Product-description">{product.description}</p>
       <div
         className="Product-quantity"
       >
@@ -41,6 +50,7 @@ function Product() {
           name="quantity"
         />
       </div>
+      <button>Add to Cart</button>
     </div>
   );
 }
