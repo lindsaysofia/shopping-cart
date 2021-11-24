@@ -1,5 +1,88 @@
 .Product {
   position: absolute;
-  top: 4em;
+  top: 5em;
+  display: grid;
+  grid-template-areas: 
+    "image title price"
+    "image rating rating"
+    "image description description"
+    "image quantity quantity"
+    "image add add";
+  grid-template-columns: 50% 25% 25%;
+  justify-items: start;
+  align-items: center;
+  text-align: left;
+  box-sizing: border-box;
+  width: 80%;
+  max-width: 100vw;
+  gap: 1em;
+}
+
+@media only screen and (max-width: 800px) {
+  .Product {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    top: 10em;
+    min-width: 300px;
+  }
+
+  .Product-image {
+    height: 200px;
+    align-self: center;
+  }
+}
+
+.Product-image {
+  grid-area: image;
+  max-height: 500px;
+  max-width: 300px;
+  justify-self: center;
+}
+
+.Product-title {
+  grid-area: title;
+}
+.Product-price {
+  grid-area: price;
+  justify-self: center;
+}
+
+.Product-rating {
   width: 100%;
+  grid-area: rating;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
+}
+
+.rating-count {
+  text-decoration: underline;
+}
+
+.Product-description {
+  grid-area: description;
+}
+
+.Product-quantity {
+  grid-area: quantity;
+}
+
+.Product-add {
+  grid-area: add;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: var(--color-tan);
+  height: 100%;
+  padding: 1em;
+  font-weight: bold;
+}
+
+.Product-add:hover {
+  cursor: pointer;
+  background-color: rgb(226, 222, 222);
+  
 }
