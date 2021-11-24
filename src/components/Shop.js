@@ -1,41 +1,12 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Shop.css';
 
-function Shop() {
-  const [products, setProducts] = useState([{}]);
-  const [categories, setCategories] = useState([]);
-
-  async function getCategories() {
-    const response = await fetch('https://fakestoreapi.com/products/categories', {mode: 'cors'});
-    const data = await response.json();
-    setCategories(data);
-  }
-
-  async function getProducts() {
-    const response = await fetch('https://fakestoreapi.com/products', {mode: 'cors'});
-    const data = await response.json();
-    setProducts(data);
-  }
-
-
-  useEffect(() => {
-    getCategories();
-    return () => {
-      setCategories([]);
-    };
-  }, []);
-
-  useEffect(() => {
-    getProducts();
-    return () => {
-      setProducts([]);
-    };
-  }, []);
+function Shop(props) {
+  const { categories, products } = props;
 
   return (
     <div className="Shop">
-      <h2 className="Shop-results">{products.length} results</h2>
+      <h2 className="Shop-results">{products.length} {products.length > 1 ? 'results' : 'result'}</h2>
       <fieldset className="Shop-filter">
         <legend>Categories</legend>
         <div>
