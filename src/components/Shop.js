@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import '../styles/Shop.css';
 
 function Shop(props) {
-  const { categories, products } = props;
+  const { categories, products, displayCategories, filterCategories } = props;
 
   return (
     <div className="Shop">
@@ -13,7 +13,15 @@ function Shop(props) {
           {categories.map((category, index) => {
             return (
               <div key={index} className="Shop-category">
-                <input type="checkbox" id={category} name="category" value={category} />
+                <input 
+                  type="checkbox" 
+                  id={category} 
+                  name="category" 
+                  checked={displayCategories.includes(category)} 
+                  data-category={category}
+                  data-parent="shop"
+                  onChange={filterCategories}
+                />
                 <label htmlFor={category}>{category}</label>
               </div>
             );
@@ -22,6 +30,9 @@ function Shop(props) {
       </fieldset>
       <div className="Shop-products">
         {products.map((product, index) => {
+          if (!displayCategories.includes(product.category)) {
+            return;
+          }
           return (
             <Link key={index} className="Shop-product" to={`/shop/${product.id}`} onClick={() => console.log(product.id)}>
               <img src={product.image} alt=""/>

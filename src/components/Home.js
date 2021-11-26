@@ -3,7 +3,7 @@ import Category from "./Category";
 import '../styles/Home.css';
 
 function Home(props) {
-  const { categories } = props;
+  const { categories, filterCategories } = props;
 
   return (
     <div className="Home">
@@ -13,7 +13,7 @@ function Home(props) {
         <h2 className="Home-featured">Featured Categories</h2>
         <Link to="/shop" className="Home-shop">Shop All</Link>
         <div className="Categories">
-          {categories.map((category, index) => <Category key={index} category={category}/>)}
+          {categories.map((category, index) => <Category key={index} category={category} filterCategories={filterCategories}/>)}
         </div>
       </div>
     </div>
