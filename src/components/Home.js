@@ -11,7 +11,7 @@ function Home(props) {
       </div>
       <div className="Home-main">
         <h2 className="Home-featured">Featured Categories</h2>
-        <Link to="/shop" className="Home-shop">Shop All</Link>
+        <Link to="/shop" className="Home-shop" onClick={filterCategories}>Shop All</Link>
         <div className="Categories">
           {categories.map((category, index) => <Category key={index} category={category} filterCategories={filterCategories}/>)}
         </div>

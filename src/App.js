@@ -7,9 +7,11 @@ import Product from './components/Product';
 import { useEffect, useState } from "react";
 
 function App() {
+  const [quantity, setQuantity] = useState(1);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([{}]);
   const [ displayCategories, setDisplayCategories ] = useState([]);
+  const [cart, setCart] = useState({});
 
   async function getCategories() {
     const response = await fetch('https://fakestoreapi.com/products/categories', {mode: 'cors'});
@@ -25,7 +27,7 @@ function App() {
   }
 
   const filterCategories = (e) => {
-    const { category, parent } = e.target.dataset; 
+    const { category, parent } = e.target.dataset;
     if (parent === 'home'){
       setDisplayCategories([category]);
     } else if (parent === 'shop') {
@@ -43,8 +45,36 @@ function App() {
           return copy;
         });
       }
+    } else {
+      setDisplayCategories(categories);
     }
   };
+
+  const handleQuantityChange = (e) => {
+    setQuantity(Number(e.target.value));
+  };
+
+  const handleAdd = (e) => {
+    const { id } = e.target.dataset;
+    setCart((prevCart) => {
+      if (id in prevCart) {
+        console.log(prevCart[id], quantity);
+        return {
+          ...prevCart,
+          [id]: prevCart[id] + quantity,
+        }
+      } else {
+        return {
+          ...prevCart,
+          [id]: quantity,
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   useEffect(() => {
     getCategories();
@@ -67,7 +97,7 @@ function App() {
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home categories={categories} filterCategories={filterCategories} />} />
           <Route path="shop" element={<Shop categories={categories} products={products} displayCategories={displayCategories} filterCategories={filterCategories}/>} />
-          <Route path="shop/:id" element={<Product />} />
+          <Route path="shop/:id" element={<Product quantity={quantity} handleQuantityChange={handleQuantityChange} handleAdd={handleAdd}/>} />
           <Route path="about" element={<About />} />
         </Route>
       </Routes>

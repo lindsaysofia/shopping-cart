@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import Stars from "./Stars";
 import '../styles/Product.css';
 
-function Product() {
+function Product(props) {
+  const { quantity, handleQuantityChange, handleAdd } = props;
   const [product, setProduct] = useState({rating: {rate: 0, count: 0}});
   const params = useParams();
   const id = params.id;
@@ -11,7 +12,6 @@ function Product() {
   async function getProduct() {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`, {mode: 'cors'});
     const data = await response.json();
-    console.log(data);
     setProduct(data);
   }
 
@@ -47,11 +47,12 @@ function Product() {
           type="number"
           min="1"
           max="10"
-          value="1"
+          value={quantity}
           name="quantity"
+          onChange={handleQuantityChange}
         />
       </div>
-      <button className="Product-add">Add to Cart</button>
+      <button className="Product-add" data-id={product.id} onClick={handleAdd}>Add to Cart</button>
     </div>
   );
 }
