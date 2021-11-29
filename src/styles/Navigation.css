@@ -30,3 +30,7 @@
   text-decoration: none;
   color: var(--color-black);
 }
+
+.Navigation-cart:hover {
+  cursor: pointer;
+}

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import '../styles/Shop.css';
 
 function Shop(props) {
-  const { categories, products, displayCategories, filterCategories } = props;
+  const { categories, products, displayCategories, filterCategories, resetQuantity } = props;
 
   return (
     <div className="Shop">
@@ -34,7 +34,7 @@ function Shop(props) {
             return;
           }
           return (
-            <Link key={index} className="Shop-product" to={`/shop/${product.id}`} onClick={() => console.log(product.id)}>
+            <Link key={index} className="Shop-product" to={`/shop/${product.id}`} onClick={resetQuantity}>
               <img src={product.image} alt=""/>
               <p>{product.title}</p>
             </Link>

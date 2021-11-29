@@ -1,0 +1,137 @@
+.Cart {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  visibility: hidden;
+}
+
+.Cart-display {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  width: 40%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+}
+
+@media only screen and (max-width: 801px) {
+  .Cart-display {
+    display: flex;
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Cart-display {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.Cart-heading {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--color-tan);
+}
+
+.heading-title {
+  padding: 1em;
+  margin: 0;
+}
+
+.heading-exit {
+  width: 3em;
+  height: 3em;
+  align-self: center;
+}
+
+.Cart button {
+  background-color: var(--color-tan);
+  color: var(--color-black);
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.Cart button:hover {
+  cursor: pointer;
+}
+
+.item {
+  display: grid;
+  grid-template-areas: 
+  "image title price"
+  "image quantity price";
+  justify-items: center;
+  align-items: center;
+  gap: 1em;
+  text-align: center;
+  border-bottom: 1px solid var(--color-tan);
+  margin: 1em;
+}
+
+.item-image {
+  max-width: 50px;
+  max-height: 75px;
+  grid-area: image;
+  justify-self: start;
+}
+
+.item-title {
+  grid-area: title;
+  font-size: 1em;
+  align-self: end;
+  margin: 0;
+}
+
+.item-price {
+  grid-area: price;
+  justify-self: end;
+}
+
+.item-quantity {
+  grid-area: quantity;
+  align-self: start;
+}
+
+.item-quantity > * {
+  margin: .5em;
+}
+
+.quantity-decrease,
+.quantity-increase {
+  width: 2em;
+  height: 2em;
+}
+
+.Cart-checkout {
+  width: 100%;
+}
+
+.Cart-checkout h2 {
+  margin: .5em;
+}
+
+.Cart-checkout button {
+  width: 90%;
+  height: 4em;
+}
+
+.Cart-checkout button:hover {
+  background-color: rgb(226, 222, 222);;
+}

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [quantity, setQuantity] = useState(1);
   const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([{}]);
+  const [products, setProducts] = useState([{price: 0}]);
   const [ displayCategories, setDisplayCategories ] = useState([]);
   const [cart, setCart] = useState({});
 
@@ -54,8 +54,23 @@ function App() {
     setQuantity(Number(e.target.value));
   };
 
+  const resetQuantity = () => {
+    setQuantity(1);
+  };
+
+  const displayCart = () => {
+    const cartElement = document.querySelector('.Cart');
+    cartElement.style.visibility = 'visible';
+  }
+
+  const hideCart = () => {
+    const cartElement = document.querySelector('.Cart');
+    cartElement.style.visibility = 'hidden';
+  };
+
   const handleAdd = (e) => {
     const { id } = e.target.dataset;
+    displayCart();
     setCart((prevCart) => {
       if (id in prevCart) {
         console.log(prevCart[id], quantity);
@@ -72,9 +87,66 @@ function App() {
     });
   };
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  const handleCartQuantityChange = (e) => {
+    const { action, id } = e.target.dataset;
+    switch(action) {
+      case 'decrease':
+        setCart((prevCart) => {
+          if (prevCart[id] === 1) {
+            let newCart = {...prevCart};
+            delete newCart[id];
+            return newCart;
+          } else {
+            return {
+              ...prevCart,
+              [id]: prevCart[id] - 1,
+            }
+          }
+        });
+        break;
+      case 'manual':
+        let value = e.target.value;
+        if (value === '') {
+          setCart((prevCart) =>{
+            return {
+              ...prevCart,
+              [id]: value,
+            }
+          });
+        } else {
+          value = Number(value);
+          setCart((prevCart) => {
+            if (value < 0 || value > 10) {
+              return prevCart;
+            } else if (value === 0) {
+              let newCart = {...prevCart};
+              delete newCart[id];
+              return newCart;
+            } else {
+              return {
+                ...prevCart,
+                [id]: value,
+              }
+            }
+          });
+        }
+        break;
+      case 'increase':
+        setCart((prevCart) => {
+          if (prevCart[id] === 10) {
+            return prevCart;
+          } else {
+            return {
+              ...prevCart,
+              [id]: prevCart[id] + 1,
+            }
+          }
+        });
+        break;
+      default:
+        break;
+    }
+  }
 
   useEffect(() => {
     getCategories();
@@ -87,16 +159,16 @@ function App() {
   useEffect(() => {
     getProducts();
     return () => {
-      setProducts([]);
+      setProducts([{price: 0}]);
     };
   }, []);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigation />}>
+        <Route path="/" element={<Navigation cart={cart} products={products} displayCart={displayCart} hideCart={hideCart} handleCartQuantityChange={handleCartQuantityChange} />}>
           <Route index element={<Home categories={categories} filterCategories={filterCategories} />} />
-          <Route path="shop" element={<Shop categories={categories} products={products} displayCategories={displayCategories} filterCategories={filterCategories}/>} />
+          <Route path="shop" element={<Shop categories={categories} products={products} displayCategories={displayCategories} filterCategories={filterCategories} resetQuantity={resetQuantity}/>} />
           <Route path="shop/:id" element={<Product quantity={quantity} handleQuantityChange={handleQuantityChange} handleAdd={handleAdd}/>} />
           <Route path="about" element={<About />} />
         </Route>
