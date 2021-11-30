@@ -51,7 +51,19 @@ function App() {
   };
 
   const handleQuantityChange = (e) => {
-    setQuantity(Number(e.target.value));
+    let { value } = e.target;
+    if (value === '') {
+      setQuantity('');
+    } else {
+      value = Number(e.target.value);
+      if (value < 1) {
+        setQuantity(1);
+      } else if (value > 10) {
+        setQuantity(10);
+      } else {
+        setQuantity(value);
+      }
+    }
   };
 
   const resetQuantity = () => {
@@ -164,7 +176,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<Navigation cart={cart} products={products} displayCart={displayCart} hideCart={hideCart} handleCartQuantityChange={handleCartQuantityChange} />}>
           <Route index element={<Home categories={categories} filterCategories={filterCategories} />} />
